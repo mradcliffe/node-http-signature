@@ -69,7 +69,7 @@ test('header with 0 value', function(t) {
     headers: ['date', 'request-line', 'content-length']
   };
 
-  t.ok(httpSignature.sign(req, opts));
+  t.ok(httpSignature.cavage12Draft.sign(req, opts));
   t.ok(req.getHeader('Authorization'));
   console.log('> ' + req.getHeader('Authorization'));
   req.end();
@@ -85,7 +85,7 @@ test('header with boolean-mungable value', function(t) {
     headers: ['date', 'x-foo']
   };
 
-  t.ok(httpSignature.sign(req, opts));
+  t.ok(httpSignature.cavage12Draft.sign(req, opts));
   t.ok(req.getHeader('Authorization'));
   console.log('> ' + req.getHeader('Authorization'));
   req.end();

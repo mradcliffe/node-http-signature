@@ -88,8 +88,8 @@ test('setup', function(t) {
 
 test('invalid hmac', function(t) {
   server.tester = function(req, res) {
-    var parsed = httpSignature.parseRequest(req);
-    t.ok(!httpSignature.verifyHMAC(parsed, hmacKey));
+    var parsed = httpSignature.cavage12Draft.parseRequest(req);
+    t.ok(!httpSignature.cavage12Draft.verifyHMAC(parsed, hmacKey));
 
     res.writeHead(200);
     res.write(JSON.stringify(parsed, null, 2));
@@ -110,8 +110,8 @@ test('invalid hmac', function(t) {
 
 test('valid hmac', function(t) {
   server.tester = function(req, res) {
-    var parsed = httpSignature.parseRequest(req);
-    t.ok(httpSignature.verifyHMAC(parsed, hmacKey));
+    var parsed = httpSignature.cavage12Draft.parseRequest(req);
+    t.ok(httpSignature.cavage12Draft.verifyHMAC(parsed, hmacKey));
 
     res.writeHead(200);
     res.write(JSON.stringify(parsed, null, 2));
@@ -133,8 +133,8 @@ test('valid hmac', function(t) {
 
 test('invalid raw hmac', function(t) {
   server.tester = function(req, res) {
-    var parsed = httpSignature.parseRequest(req);
-    t.ok(!httpSignature.verifyHMAC(parsed, rawhmacKey));
+    var parsed = httpSignature.cavage12Draft.parseRequest(req);
+    t.ok(!httpSignature.cavage12Draft.verifyHMAC(parsed, rawhmacKey));
 
     res.writeHead(200);
     res.write(JSON.stringify(parsed, null, 2));
@@ -154,8 +154,8 @@ test('invalid raw hmac', function(t) {
 
 test('valid raw hmac', function(t) {
   server.tester = function(req, res) {
-    var parsed = httpSignature.parseRequest(req);
-    t.ok(httpSignature.verifyHMAC(parsed, rawhmacKey));
+    var parsed = httpSignature.cavage12Draft.parseRequest(req);
+    t.ok(httpSignature.cavage12Draft.verifyHMAC(parsed, rawhmacKey));
 
     res.writeHead(200);
     res.write(JSON.stringify(parsed, null, 2));
@@ -177,8 +177,8 @@ test('valid raw hmac', function(t) {
 
 test('invalid rsa', function(t) {
   server.tester = function(req, res) {
-    var parsed = httpSignature.parseRequest(req);
-    t.ok(!httpSignature.verify(parsed, rsaPublic));
+    var parsed = httpSignature.cavage12Draft.parseRequest(req);
+    t.ok(!httpSignature.cavage12Draft.verify(parsed, rsaPublic));
 
     res.writeHead(200);
     res.write(JSON.stringify(parsed, null, 2));
@@ -199,8 +199,8 @@ test('invalid rsa', function(t) {
 
 test('valid rsa', function(t) {
   server.tester = function(req, res) {
-    var parsed = httpSignature.parseRequest(req);
-    t.ok(httpSignature.verify(parsed, rsaPublic));
+    var parsed = httpSignature.cavage12Draft.parseRequest(req);
+    t.ok(httpSignature.cavage12Draft.verify(parsed, rsaPublic));
 
     res.writeHead(200);
     res.write(JSON.stringify(parsed, null, 2));
@@ -222,8 +222,8 @@ test('valid rsa', function(t) {
 
 test('invalid dsa', function(t) {
   server.tester = function(req, res) {
-    var parsed = httpSignature.parseRequest(req);
-    t.ok(!httpSignature.verify(parsed, dsaPublic));
+    var parsed = httpSignature.cavage12Draft.parseRequest(req);
+    t.ok(!httpSignature.cavage12Draft.verify(parsed, dsaPublic));
 
     res.writeHead(200);
     res.write(JSON.stringify(parsed, null, 2));
@@ -244,8 +244,8 @@ test('invalid dsa', function(t) {
 
 test('valid dsa', function(t) {
   server.tester = function(req, res) {
-    var parsed = httpSignature.parseRequest(req);
-    t.ok(httpSignature.verify(parsed, dsaPublic));
+    var parsed = httpSignature.cavage12Draft.parseRequest(req);
+    t.ok(httpSignature.cavage12Draft.verify(parsed, dsaPublic));
 
     res.writeHead(200);
     res.write(JSON.stringify(parsed, null, 2));
@@ -268,8 +268,8 @@ test('valid dsa', function(t) {
 
 test('invalid ecdsa', function(t) {
   server.tester = function(req, res) {
-    var parsed = httpSignature.parseRequest(req);
-    t.ok(!httpSignature.verify(parsed, ecdsaPublic));
+    var parsed = httpSignature.cavage12Draft.parseRequest(req);
+    t.ok(!httpSignature.cavage12Draft.verify(parsed, ecdsaPublic));
 
     res.writeHead(200);
     res.write(JSON.stringify(parsed, null, 2));
@@ -290,8 +290,8 @@ test('invalid ecdsa', function(t) {
 
 test('valid ecdsa', function(t) {
   server.tester = function(req, res) {
-    var parsed = httpSignature.parseRequest(req);
-    t.ok(httpSignature.verify(parsed, ecdsaPublic));
+    var parsed = httpSignature.cavage12Draft.parseRequest(req);
+    t.ok(httpSignature.cavage12Draft.verify(parsed, ecdsaPublic));
 
     res.writeHead(200);
     res.write(JSON.stringify(parsed, null, 2));
@@ -314,8 +314,8 @@ test('valid ecdsa', function(t) {
 
 test('invalid ed25519', function(t) {
   server.tester = function(req, res) {
-    var parsed = httpSignature.parseRequest(req);
-    t.ok(!httpSignature.verify(parsed, ed25519Public));
+    var parsed = httpSignature.cavage12Draft.parseRequest(req);
+    t.ok(!httpSignature.cavage12Draft.verify(parsed, ed25519Public));
 
     res.writeHead(200);
     res.write(JSON.stringify(parsed, null, 2));
@@ -336,8 +336,8 @@ test('invalid ed25519', function(t) {
 
 test('valid ed25519', function(t) {
   server.tester = function(req, res) {
-    var parsed = httpSignature.parseRequest(req);
-    t.ok(httpSignature.verify(parsed, ed25519Public));
+    var parsed = httpSignature.cavage12Draft.parseRequest(req);
+    t.ok(httpSignature.cavage12Draft.verify(parsed, ed25519Public));
 
     res.writeHead(200);
     res.write(JSON.stringify(parsed, null, 2));
@@ -361,8 +361,8 @@ test('valid ed25519', function(t) {
 
 test('invalid hs2019', function(t) {
   server.tester = function(req, res) {
-    var parsed = httpSignature.parseRequest(req);
-    t.ok(!httpSignature.verify(parsed, ecdsaPublic));
+    var parsed = httpSignature.cavage12Draft.parseRequest(req);
+    t.ok(!httpSignature.cavage12Draft.verify(parsed, ecdsaPublic));
 
     res.writeHead(200);
     res.write(JSON.stringify(parsed, null, 2));
@@ -382,8 +382,8 @@ test('invalid hs2019', function(t) {
 
 test('for now valid hs2019 (valid ecdsa-sha256)', function(t) {
   server.tester = function(req, res) {
-    var parsed = httpSignature.parseRequest(req);
-    t.ok(httpSignature.verify(parsed, ecdsaPublic), 'hs2019 ecdsa-sha256');
+    var parsed = httpSignature.cavage12Draft.parseRequest(req);
+    t.ok(httpSignature.cavage12Draft.verify(parsed, ecdsaPublic), 'hs2019 ecdsa-sha256');
 
     res.writeHead(200);
     res.write(JSON.stringify(parsed, null, 2));
@@ -406,8 +406,8 @@ test('for now valid hs2019 (valid ecdsa-sha256)', function(t) {
 
 test('for now invalid hs2019 (valid ecdsa-sha512)', function(t) {
   server.tester = function(req, res) {
-    var parsed = httpSignature.parseRequest(req);
-    t.ok(!httpSignature.verify(parsed, ecdsaPublic), 'hs2019 ecdsa-sha512');
+    var parsed = httpSignature.cavage12Draft.parseRequest(req);
+    t.ok(!httpSignature.cavage12Draft.verify(parsed, ecdsaPublic), 'hs2019 ecdsa-sha512');
 
     res.writeHead(200);
     res.write(JSON.stringify(parsed, null, 2));
@@ -430,8 +430,8 @@ test('for now invalid hs2019 (valid ecdsa-sha512)', function(t) {
 
 test('for now invalid hs2019 (valid ed25519-sha512)', function(t) {
   server.tester = function(req, res) {
-    var parsed = httpSignature.parseRequest(req);
-    t.ok(httpSignature.verify(parsed, ed25519Public), 'hs2019 ed25519-sha512');
+    var parsed = httpSignature.cavage12Draft.parseRequest(req);
+    t.ok(httpSignature.cavage12Draft.verify(parsed, ed25519Public), 'hs2019 ed25519-sha512');
 
     res.writeHead(200);
     res.write(JSON.stringify(parsed, null, 2));
@@ -454,8 +454,8 @@ test('for now invalid hs2019 (valid ed25519-sha512)', function(t) {
 
 test('for now invalid hs2019 (valid dsa-sha512)', function(t) {
   server.tester = function(req, res) {
-    var parsed = httpSignature.parseRequest(req);
-    t.ok(!httpSignature.verify(parsed, dsaPublic), 'hs2019 dsa-sha512');
+    var parsed = httpSignature.cavage12Draft.parseRequest(req);
+    t.ok(!httpSignature.cavage12Draft.verify(parsed, dsaPublic), 'hs2019 dsa-sha512');
 
     res.writeHead(200);
     res.write(JSON.stringify(parsed, null, 2));
@@ -478,8 +478,8 @@ test('for now invalid hs2019 (valid dsa-sha512)', function(t) {
 
 test('for now valid hs2019 (valid rsa-sha256)', function(t) {
   server.tester = function(req, res) {
-    var parsed = httpSignature.parseRequest(req);
-    t.ok(httpSignature.verify(parsed, rsaPublic), 'hs2019 rsa-sha256');
+    var parsed = httpSignature.cavage12Draft.parseRequest(req);
+    t.ok(httpSignature.cavage12Draft.verify(parsed, rsaPublic), 'hs2019 rsa-sha256');
 
     res.writeHead(200);
     res.write(JSON.stringify(parsed, null, 2));
@@ -501,8 +501,8 @@ test('for now valid hs2019 (valid rsa-sha256)', function(t) {
 
 test('for now invalid hs2019 (valid rsa-sha512)', function(t) {
   server.tester = function(req, res) {
-    var parsed = httpSignature.parseRequest(req);
-    t.ok(!httpSignature.verify(parsed, rsaPublic), 'hs2019 rsa-sha512');
+    var parsed = httpSignature.cavage12Draft.parseRequest(req);
+    t.ok(!httpSignature.cavage12Draft.verify(parsed, rsaPublic), 'hs2019 rsa-sha512');
 
     res.writeHead(200);
     res.write(JSON.stringify(parsed, null, 2));
@@ -526,7 +526,7 @@ test('for now invalid hs2019 (valid rsa-sha512)', function(t) {
 test('invalid date', function(t) {
   server.tester = function(req, res) {
     t.throws(function() {
-      httpSignature.parseRequest(req);
+      httpSignature.cavage12Draft.parseRequest(req);
     });
 
     res.writeHead(400);
@@ -555,11 +555,11 @@ test('invalid date', function(t) {
 // test values from spec for simple test
 test('valid rsa from spec default', function(t) {
   server.tester = function(req, res) {
-    var parsed = httpSignature.parseRequest(req, {
+    var parsed = httpSignature.cavage12Draft.parseRequest(req, {
       // this test uses a fixed old date so ignore clock skew
       clockSkew: Number.MAX_VALUE
     });
-    t.ok(httpSignature.verify(parsed, rsaPublic));
+    t.ok(httpSignature.cavage12Draft.verify(parsed, rsaPublic));
     // check known signature
     t.ok(req.headers.authorization === 'Signature keyId="Test",algorithm="rsa-sha256",signature="ATp0r26dbMIxOopqw0OfABDT7CKMIoENumuruOtarj8n/97Q3htHFYpH8yOSQk3Z5zh8UxUym6FYTb5+A0Nz3NRsXJibnYi7brE/4tx5But9kkFGzG+xpUmimN4c3TMN7OFH//+r8hBf7BT9/GmHDUVZT2JzWGLZES2xDOUuMtA="');
 
@@ -594,11 +594,11 @@ test('valid rsa from spec default', function(t) {
   sha256sum.update(jsonMessage)
 
   server.tester = function(req, res) {
-    var parsed = httpSignature.parseRequest(req, {
+    var parsed = httpSignature.cavage12Draft.parseRequest(req, {
       // this test uses a fixed old date so ignore clock skew
       clockSkew: Number.MAX_VALUE
     });
-    t.ok(httpSignature.verify(parsed, rsaPublic));
+    t.ok(httpSignature.cavage12Draft.verify(parsed, rsaPublic));
     // check known signature
     t.ok(req.headers.authorization === 'Signature keyId="Test",algorithm="rsa-sha256",signature="jKyvPcxB4JbmYY4mByyBY7cZfNl4OW9HpFQlG7N4YcJPteKTu4MWCLyk+gIr0wDgqtLWf9NLpMAMimdfsH7FSWGfbMFSrsVTHNTk0rK3usrfFnti1dxsM4jl0kYJCKTGI/UWkqiaxwNiKqGcdlEDrTcUhhsFsOIo8VhddmZTZ8w="');
 
@@ -635,11 +635,11 @@ test('valid rsa from spec all headers', function(t) {
   sha256sum.update(jsonMessage)
 
   server.tester = function(req, res) {
-    var parsed = httpSignature.parseRequest(req, {
+    var parsed = httpSignature.cavage12Draft.parseRequest(req, {
       // this test uses a fixed old date so ignore clock skew
       clockSkew: Number.MAX_VALUE
     });
-    t.ok(httpSignature.verify(parsed, rsaPublic));
+    t.ok(httpSignature.cavage12Draft.verify(parsed, rsaPublic));
     // check known signature
     t.ok(req.headers.authorization === 'Signature keyId="Test",algorithm="rsa-sha256",headers="request-line host date content-type digest content-length",signature="jgSqYK0yKclIHfF9zdApVEbDp5eqj8C4i4X76pE+XHoxugXv7qnVrGR+30bmBgtpR39I4utq17s9ghz/2QFVxlnToYAvbSVZJ9ulLd1HQBugO0jOyn9sXOtcN7uNHBjqNCqUsnt0sw/cJA6B6nJZpyNqNyAXKdxZZItOuhIs78w="');
 
@@ -681,11 +681,11 @@ test('valid rsa from spec all headers (request-target)', function(t) {
   sha256sum.update(jsonMessage);
 
   server.tester = function(req, res) {
-    var parsed = httpSignature.parseRequest(req, {
+    var parsed = httpSignature.cavage12Draft.parseRequest(req, {
       // this test uses a fixed old date so ignore clock skew
       clockSkew: Number.MAX_VALUE
     });
-    t.ok(httpSignature.verify(parsed, rsaPublic));
+    t.ok(httpSignature.cavage12Draft.verify(parsed, rsaPublic));
     // check known signature
     t.ok(req.headers.authorization === 'Signature keyId="Test",algorithm="rsa-sha256",headers="(request-target) host date content-type digest content-length",signature="Tqfe2TGMEOwrHLItN2pDnKZiV3cKDWx1dTreYvWRH/kYVT0avw975g25I0/Sig2l60CDkRKTk9ciJMkn8Eanpa7aICnRWbOu38+ozMfQrM7cc06NRSY6+UQ67dn6K4jEW0WNWxhLLwWBSXxhxuXOL3rFKYZliNCundM9FiYk5aE="');
 

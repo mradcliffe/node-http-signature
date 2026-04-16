@@ -88,7 +88,7 @@ test('defaults', function(t) {
     t.end();
   });
   req._stringToSign = null;
-  t.ok(httpSignature.sign(req, signOptions));
+  t.ok(httpSignature.cavage12Draft.sign(req, signOptions));
   var authz = req.getHeader('Authorization');
   t.ok(authz);
 
@@ -110,7 +110,7 @@ test('with custom authorizationHeaderName', function(t) {
   req._stringToSign = null;
   var opts = Object.create(signOptions);
   opts.authorizationHeaderName = 'x-auths';
-  t.ok(httpSignature.sign(req, opts));
+  t.ok(httpSignature.cavage12Draft.sign(req, opts));
   var authz = req.getHeader('x-auths');
   t.ok(authz);
 
@@ -137,7 +137,7 @@ test('request line strict unspecified', function(t) {
   };
 
   req._stringToSign = null;
-  t.ok(httpSignature.sign(req, opts));
+  t.ok(httpSignature.cavage12Draft.sign(req, opts));
   t.ok(req.getHeader('Authorization'));
   t.equal(typeof (req._stringToSign), 'string');
   t.ok(req._stringToSign.match(/^date: [^\n]*\nGET \/ HTTP\/1.1$/));
@@ -157,7 +157,7 @@ test('request line strict false', function(t) {
     strict: false
   };
 
-  t.ok(httpSignature.sign(req, opts));
+  t.ok(httpSignature.cavage12Draft.sign(req, opts));
   t.ok(req.getHeader('Authorization'));
   t.ok(!req.hasOwnProperty('_stringToSign'));
   t.ok(req._stringToSign === undefined);
@@ -177,7 +177,7 @@ test('request line strict true', function(t) {
   };
 
   t.throws(function() {
-     httpSignature.sign(req, opts)
+     httpSignature.cavage12Draft.sign(req, opts)
    });
   req.end();
 });
@@ -193,7 +193,7 @@ test('request target', function(t) {
   };
 
   req._stringToSign = null;
-  t.ok(httpSignature.sign(req, opts));
+  t.ok(httpSignature.cavage12Draft.sign(req, opts));
   t.ok(req.getHeader('Authorization'));
   t.equal(typeof (req._stringToSign), 'string');
   t.ok(req._stringToSign.match(/^date: [^\n]*\n\(request-target\): get \/$/));
@@ -212,7 +212,7 @@ test('keyid', function(t) {
   };
 
   req._stringToSign = null;
-  t.ok(httpSignature.sign(req, opts));
+  t.ok(httpSignature.cavage12Draft.sign(req, opts));
   t.ok(req.getHeader('Authorization'));
   t.equal(typeof (req._stringToSign), 'string');
   t.ok(req._stringToSign.match(/^date: [^\n]*\n\(keyid\): unit$/));
@@ -232,7 +232,7 @@ test('signing algorithm', function(t) {
   };
 
   req._stringToSign = null;
-  t.ok(httpSignature.sign(req, opts));
+  t.ok(httpSignature.cavage12Draft.sign(req, opts));
   t.ok(req.getHeader('Authorization'));
   t.equal(typeof (opts.algorithm), 'string');
   t.equal(opts.algorithm, 'rsa-sha256');
@@ -253,7 +253,7 @@ test('signing with unspecified algorithm', function(t) {
   };
 
   req._stringToSign = null;
-  t.ok(httpSignature.sign(req, opts));
+  t.ok(httpSignature.cavage12Draft.sign(req, opts));
   t.ok(req.getHeader('Authorization'));
   t.equal(typeof (opts.algorithm), 'string');
   t.equal(typeof (req._stringToSign), 'string');
@@ -274,7 +274,7 @@ test('hide algorithm (unspecified algorithm)', function(t) {
   };
 
   req._stringToSign = null;
-  t.ok(httpSignature.sign(req, opts));
+  t.ok(httpSignature.cavage12Draft.sign(req, opts));
   t.ok(req.getHeader('Authorization'));
   t.equal(typeof (opts.algorithm), 'string');
   t.equal(opts.algorithm, 'hs2019');
@@ -296,7 +296,7 @@ test('signing opaque param', function(t) {
   };
 
   req._stringToSign = null;
-  t.ok(httpSignature.sign(req, opts));
+  t.ok(httpSignature.cavage12Draft.sign(req, opts));
   t.ok(req.getHeader('Authorization'));
   t.equal(typeof (opts.algorithm), 'string');
   t.equal(typeof (req._stringToSign), 'string');
@@ -317,7 +317,7 @@ test('signing with key protected with passphrase', function(t) {
   };
 
   req._stringToSign = null;
-  t.ok(httpSignature.sign(req, opts));
+  t.ok(httpSignature.cavage12Draft.sign(req, opts));
   t.ok(req.getHeader('Authorization'));
   t.equal(typeof (opts.algorithm), 'string');
   t.equal(typeof (req._stringToSign), 'string');
@@ -336,7 +336,7 @@ test('request-target with dsa key', function(t) {
     headers: ['date', '(request-target)']
   };
 
-  t.ok(httpSignature.sign(req, opts));
+  t.ok(httpSignature.cavage12Draft.sign(req, opts));
   t.ok(req.getHeader('Authorization'));
   console.log('> ' + req.getHeader('Authorization'));
   req.end();
@@ -352,7 +352,7 @@ test('request-target with ecdsa key', function(t) {
     headers: ['date', '(request-target)']
   };
 
-  t.ok(httpSignature.sign(req, opts));
+  t.ok(httpSignature.cavage12Draft.sign(req, opts));
   t.ok(req.getHeader('Authorization'));
   console.log('> ' + req.getHeader('Authorization'));
   req.end();
@@ -368,14 +368,14 @@ test('hmac', function(t) {
     algorithm: 'hmac-sha1'
   };
 
-  t.ok(httpSignature.sign(req, opts));
+  t.ok(httpSignature.cavage12Draft.sign(req, opts));
   t.ok(req.getHeader('Authorization'));
   console.log('> ' + req.getHeader('Authorization'));
   req.end();
 });
 
 test('createSigner with RSA key', function(t) {
-  var s = httpSignature.createSigner({
+  var s = httpSignature.cavage12Draft.createSigner({
     keyId: 'foo',
     key: rsaPrivate,
     algorithm: 'rsa-sha1'
@@ -395,7 +395,7 @@ test('createSigner with RSA key', function(t) {
 });
 
 test('createSigner with RSA key, auto algo', function(t) {
-  var s = httpSignature.createSigner({
+  var s = httpSignature.cavage12Draft.createSigner({
     keyId: 'foo',
     key: rsaPrivate
   });
@@ -413,7 +413,7 @@ test('createSigner with RSA key, auto algo', function(t) {
 });
 
 test('createSigner with RSA key, auto algo, passphrase', function(t) {
-  var s = httpSignature.createSigner({
+  var s = httpSignature.cavage12Draft.createSigner({
     keyId: 'foo',
     key: rsaPrivateEncrypted,
     keyPassphrase: '123'
@@ -432,7 +432,7 @@ test('createSigner with RSA key, auto algo, passphrase', function(t) {
 });
 
 test('createSigner with HMAC key', function(t) {
-  var s = httpSignature.createSigner({
+  var s = httpSignature.cavage12Draft.createSigner({
     keyId: 'foo',
     key: hmacKey,
     algorithm: 'hmac-sha256'
@@ -454,7 +454,7 @@ test('createSigner with HMAC key', function(t) {
 
 test('createSigner with sign function', function(t) {
   var date;
-  var s = httpSignature.createSigner({
+  var s = httpSignature.cavage12Draft.createSigner({
     sign: function (data, cb) {
       t.ok(typeof (data) === 'string');
       var m = data.match(/^date: (.+)$/);
@@ -490,7 +490,7 @@ test('ed25519', function(t) {
     algorithm: 'ed25519-sha512'
   };
 
-  t.ok(httpSignature.sign(req, opts));
+  t.ok(httpSignature.cavage12Draft.sign(req, opts));
   t.ok(req.getHeader('Authorization'));
   console.log('> ' + req.getHeader('Authorization'));
   req.end();
