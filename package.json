@@ -31,8 +31,8 @@
   },
   "dependencies": {
     "assert-plus": "^1.0.0",
-    "jsprim": "^1.2.2",
-    "sshpk": "^1.14.1"
+    "jsprim": "^1.4.2",
+    "sshpk": "^1.18.0"
   },
   "devDependencies": {
     "tap": "^16.2.0",
