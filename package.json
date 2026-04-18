@@ -27,7 +27,7 @@
     "lib"
   ],
   "scripts": {
-    "test": "tap test/*.js"
+    "test": "tap test/*.js test/**/*.js"
   },
   "dependencies": {
     "assert-plus": "^1.0.0",
