@@ -52,7 +52,7 @@ test('no key id', function(t) {
       httpSignature.rfc9421.parseRequest(req);
     } catch (e) {
       console.error(e);
-      t.equal(e.name, 'InvalidHeaderError');
+      t.equal(e.name, 'InvalidParamsError');
       t.equal(e.message, 'keyid was not specified');
     }
 
@@ -76,7 +76,7 @@ test('key id no value', function (t) {
       httpSignature.rfc9421.parseRequest(req);
     } catch (e) {
       console.error(e);
-      t.equal(e.name, 'InvalidHeaderError');
+      t.equal(e.name, 'InvalidParamsError');
       t.equal(e.message, 'keyid was not specified');
     }
 
